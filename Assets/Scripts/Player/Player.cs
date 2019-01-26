@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region SerializeField
+    public int PlayerNumber { get; set; }
     [SerializeField]
     private PlayerView playerView;
     [SerializeField]
@@ -59,6 +60,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.GameState != GameManager.State.Game)
+        {
+            return;
+        }
         stateMachine.Update();
         HandleSelectable();
     }

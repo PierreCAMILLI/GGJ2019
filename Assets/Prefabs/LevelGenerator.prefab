@@ -48,6 +48,12 @@ MonoBehaviour:
   tilePrefabs:
   - {fileID: 1205872299123520, guid: c5035531288b44f45bca0fb42ed736bd, type: 3}
   - {fileID: 1996440902704454, guid: 3f4f237f448281a46883d85b95780d7b, type: 3}
+  - {fileID: 1367386001112154, guid: 84c740d8a4e907243a6254bf8c03e57e, type: 3}
+  - {fileID: 1052622086453482, guid: 311eefe0518cfdb48b0cb6caae5cf519, type: 3}
+  - {fileID: 1624922763259936, guid: d2d6c47ac437e014897780935ab34a03, type: 3}
+  - {fileID: 1109700216865016, guid: 53f4ea9d721fb2b4cb1cea846597f057, type: 3}
   - {fileID: 1334551841881020, guid: d3210d2b44b347b48a9f2eb1780917e7, type: 3}
-  startTilePrefab: {fileID: 1205872299123520, guid: c5035531288b44f45bca0fb42ed736bd,
+  startTilePrefab: {fileID: 8080741157846499974, guid: d30488fbbf6ff064b9d16250e9948c92,
+    type: 3}
+  playerPrefab: {fileID: 1723605343310872895, guid: a9efc4785faef42488d731b6910cacb6,
     type: 3}

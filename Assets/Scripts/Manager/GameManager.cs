@@ -16,6 +16,17 @@ public class GameManager : SingletonBehaviour<GameManager>
     #region Serialized Fields
     [SerializeField]
     private float startCounterDuration = 3f;
+    public float StartCounterDuration
+    {
+        get { return startCounterDuration; }
+    }
+
+    [SerializeField]
+    private float stopDuration = 3f;
+    public float StopDuration
+    {
+        get { return stopDuration; }
+    }
     #endregion
 
     #region Game Parameters
@@ -30,6 +41,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField]
     [Range(1,4)]
     private int playersNumber = 1;
+    public int PlayersNumber
+    {
+        get { return playersNumber; }
+    }
     #endregion
 
     #region Game Infos
@@ -41,6 +56,16 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
 
     private float startCounter;
+    public float StartCounter
+    {
+        get { return startCounter; }
+    }
+
+    private float stopCounter;
+    public float StopCounter
+    {
+        get { return stopCounter; }
+    }
 
     private float gameTimer;
     public float RemainingTime
@@ -54,6 +79,11 @@ public class GameManager : SingletonBehaviour<GameManager>
         get { return playersScore; }
     }
     #endregion
+
+    private void Start()
+    {
+        SetGameState(gameState);
+    }
 
     private void Update()
     {
@@ -79,6 +109,11 @@ public class GameManager : SingletonBehaviour<GameManager>
                 }
                 break;
             case State.StopMessage:
+                stopCounter += Time.deltaTime;
+                if (stopDuration <= stopCounter)
+                {
+                    SetGameState(State.Score);
+                }
                 break;
             case State.Score:
                 break;
@@ -92,6 +127,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void SetGameParameters(Initializer initializer)
     {
+        gameDuration = initializer.gameDuration;
         playersNumber = initializer.playersNumber;
         playersScore = new int[playersNumber];
     }
@@ -106,22 +142,44 @@ public class GameManager : SingletonBehaviour<GameManager>
             case State.MainMenu:
                 break;
             case State.StartingCounter:
+                HUD.Instance.StartingCounter.gameObject.SetActive(true);
+                HUD.Instance.StopCleaning.gameObject.SetActive(false);
+                HUD.Instance.Score.gameObject.SetActive(false);
+
                 startCounter = 0f;
                 gameTimer = 0f;
                 // TEMP
                 SetGameParameters(new Initializer
                 {
-                    gameDuration = 120f,
-                    playersNumber = 1
+                    gameDuration = 60f,
+                    playersNumber = 2
                 });
                 LevelGenerator.Instance.GenerateMap();
                 break;
             case State.Game:
+                HUD.Instance.StartingCounter.gameObject.SetActive(false);
+
+                timerActive = true;
                 break;
             case State.StopMessage:
+                HUD.Instance.StopCleaning.gameObject.SetActive(true);
+
+                stopCounter = 0f;
                 break;
             case State.Score:
+                HUD.Instance.StopCleaning.gameObject.SetActive(false);
+                HUD.Instance.Score.gameObject.SetActive(true);
                 break;
         }
+    }
+
+    public void RestartGame()
+    {
+        SetGameState(State.StartingCounter);
+    }
+
+    public void BackToMenu()
+    {
+        SetGameState(State.MainMenu);
     }
 }
