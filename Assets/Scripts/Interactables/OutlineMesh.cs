@@ -9,8 +9,8 @@ public class OutlineMesh : MonoBehaviour
     private Color outlineColor = Color.cyan;
 
     [SerializeField]
-    [Range(0f,0.3f)]
-    private float width = 0.3f;
+    [Range(0f,0.7f)]
+    private float width = 0.7f;
 
     Material outlineMaterial;
 
