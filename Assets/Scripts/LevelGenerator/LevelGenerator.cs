@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGenerator : MonoBehaviour
+public class LevelGenerator : SingletonBehaviour<LevelGenerator>
 {
     [SerializeField]
     private Vector2Int size;
     [SerializeField]
     private GameObject[] tilePrefabs;
+    [SerializeField]
+    private GameObject startTilePrefab;
 
     private List<GameObject> tilesMap;
 
@@ -18,22 +20,23 @@ public class LevelGenerator : MonoBehaviour
 
     private GameObject GetRandomTilePrefab()
     {
-        return tilePrefabs[Random.Range(0, tilePrefabs.Length - 1)];
+        return tilePrefabs[Random.Range(0, tilePrefabs.Length)];
     }
 
-    void GenerateMap()
+    public void GenerateMap()
     {
-        Bounds tileBounds = GetRandomTilePrefab().GetComponentInChildren<Renderer>().bounds;
-        //Vector3 offset = new Vector3(tileBounds.size.x * size.x, 0f, tileBounds.size.z * size.y) * -0.5f + (tileBounds.size.X0Z() * 0.5f);
+        Bounds tileBounds = startTilePrefab.GetComponentInChildren<Renderer>().bounds;
         Vector3 offset = new Vector3(tileBounds.size.x * (size.x - 1), 0f, tileBounds.size.z * (size.y - 1)) * -0.5f;
 
-        tilesMap = new List<GameObject>();
+        int startPosition = Random.Range(0, size.x * size.y);
+        tilesMap = new List<GameObject>(size.x * size.y);
         for (int j = 0; j < size.y; ++j)
         {
             for (int i = 0; i < size.x; ++i)
             {
+                GameObject prefab = ((j * size.x) + i == startPosition) ? startTilePrefab : GetRandomTilePrefab();
                 Vector3 position = new Vector3(i * tileBounds.size.x, 0f, j * tileBounds.size.z) + offset;
-                GameObject newTile = Instantiate(GetRandomTilePrefab(), position, Quaternion.identity, transform);
+                GameObject newTile = Instantiate(prefab, position, Quaternion.identity, transform);
                 tilesMap.Add(newTile);
             }
         }

@@ -188,7 +188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135902344}
   m_LocalRotation: {x: 0.5864633, y: -0, z: -0, w: 0.8099758}
-  m_LocalPosition: {x: 0, y: 299.1, z: -97.2}
+  m_LocalPosition: {x: 0, y: 250, z: -80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -482,6 +482,10 @@ MonoBehaviour:
   size: {x: 5, y: 3}
   tilePrefabs:
   - {fileID: 1205872299123520, guid: c5035531288b44f45bca0fb42ed736bd, type: 3}
+  - {fileID: 1996440902704454, guid: 3f4f237f448281a46883d85b95780d7b, type: 3}
+  - {fileID: 1334551841881020, guid: d3210d2b44b347b48a9f2eb1780917e7, type: 3}
+  startTilePrefab: {fileID: 1205872299123520, guid: c5035531288b44f45bca0fb42ed736bd,
+    type: 3}
 --- !u!4 &413333337
 Transform:
   m_ObjectHideFlags: 0
@@ -1260,6 +1264,16 @@ PrefabInstance:
         type: 3}
       propertyPath: interactionRadius
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1723605343310872892, guid: a9efc4785faef42488d731b6910cacb6,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1723605343310872892, guid: a9efc4785faef42488d731b6910cacb6,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 84
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9efc4785faef42488d731b6910cacb6, type: 3}

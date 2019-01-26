@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dontDestroyOnLoad: 0
+  gameDuration: 120
+  playersNumber: 1
 --- !u!114 &4645942088186293556
 MonoBehaviour:
   m_ObjectHideFlags: 0
