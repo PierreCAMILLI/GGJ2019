@@ -1312,5 +1312,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1367386001112154, guid: 84c740d8a4e907243a6254bf8c03e57e,
         type: 3}
+    - target: {fileID: 3567163889591648097, guid: f2befb6bdd847a74a99eca17b8b3741f,
+        type: 3}
+      propertyPath: startTilePrefab
+      value: 
+      objectReference: {fileID: 8080741157846499974, guid: d30488fbbf6ff064b9d16250e9948c92,
+        type: 3}
+    - target: {fileID: 3567163889591648097, guid: f2befb6bdd847a74a99eca17b8b3741f,
+        type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 1723605343310872895, guid: a9efc4785faef42488d731b6910cacb6,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2befb6bdd847a74a99eca17b8b3741f, type: 3}

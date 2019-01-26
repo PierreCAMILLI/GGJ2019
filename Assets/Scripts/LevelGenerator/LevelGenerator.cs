@@ -8,8 +8,12 @@ public class LevelGenerator : SingletonBehaviour<LevelGenerator>
     private Vector2Int size;
     [SerializeField]
     private GameObject[] tilePrefabs;
+
+    [Header("Starting")]
     [SerializeField]
-    private GameObject startTilePrefab;
+    private StartingTile startTilePrefab;
+    [SerializeField]
+    private Player playerPrefab;
 
     private List<GameObject> tilesMap;
 
@@ -41,10 +45,18 @@ public class LevelGenerator : SingletonBehaviour<LevelGenerator>
         {
             for (int i = 0; i < size.x; ++i)
             {
-                GameObject prefab = ((j * size.x) + i == startPosition) ? startTilePrefab : GetRandomTilePrefab();
                 Vector3 position = new Vector3(i * tileBounds.size.x, 0f, j * tileBounds.size.z) + offset;
-                GameObject newTile = Instantiate(prefab, position, Quaternion.identity, transform);
-                tilesMap.Add(newTile);
+                if ((j * size.x) + i == startPosition)
+                {
+                    StartingTile startingTile = Instantiate(startTilePrefab, position, Quaternion.identity, transform);
+                    Instantiate(playerPrefab, startingTile.StartingPoints[0].position, Quaternion.identity);
+                    tilesMap.Add(startingTile.gameObject);
+                } else
+                {
+                    GameObject prefab = GetRandomTilePrefab();
+                    GameObject newTile = Instantiate(prefab, position, Quaternion.identity, transform);
+                    tilesMap.Add(newTile);
+                }
             }
         }
     }
