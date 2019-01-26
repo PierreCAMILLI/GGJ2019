@@ -68,6 +68,14 @@ public class Player : MonoBehaviour
         stateMachine.FixedUpdate();
     }
 
+    private void LateUpdate()
+    {
+        if (closerInteractable != null)
+        {
+            closerInteractable.OnEnableInteraction();
+        }
+    }
+
     private void HandleSelectable()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);

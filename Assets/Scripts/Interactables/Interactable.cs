@@ -16,6 +16,12 @@ public class Interactable : MonoBehaviour
     }
 
     [SerializeField]
+    UnityEvent onEnableInteraction;
+
+    [SerializeField]
+    UnityEvent onDisableInteraction;
+
+    [SerializeField]
     InteractableEvent onInteraction;
 
     // Start is called before the first frame update
@@ -27,11 +33,16 @@ public class Interactable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        onDisableInteraction.Invoke();
     }
 
     public void OnInteraction(Interaction interaction)
     {
         onInteraction.Invoke(interaction);
+    }
+
+    public void OnEnableInteraction()
+    {
+        onEnableInteraction.Invoke();
     }
 }
