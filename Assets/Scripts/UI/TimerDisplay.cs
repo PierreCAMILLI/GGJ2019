@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class TimerDisplay : MonoBehaviour
 {
-
-    // Use this for initialization
-
     private float timer = 10;
     public Text timerText;
     
     public Color colorEndGame;
 
+    // Use this for initialization
     void Start()
     {
         
@@ -21,11 +19,14 @@ public class TimerDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        timerText.text = Mathf.RoundToInt(timer).ToString();
+        timer = GameManager.Instance.RemainingTime;
+        timerText.text = Mathf.CeilToInt(timer).ToString();
         if (timer <= 10)
         {
             timerText.color = colorEndGame;
+        } else
+        {
+            timerText.color = Color.black;
         }
         
        

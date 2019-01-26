@@ -13,18 +13,25 @@ public class LevelGenerator : SingletonBehaviour<LevelGenerator>
 
     private List<GameObject> tilesMap;
 
-    private void Start()
-    {
-        GenerateMap();
-    }
-
     private GameObject GetRandomTilePrefab()
     {
         return tilePrefabs[Random.Range(0, tilePrefabs.Length)];
     }
 
+    public void CleanMap()
+    {
+        if (tilesMap != null)
+        {
+            foreach(GameObject tile in tilesMap)
+            {
+                Destroy(tile);
+            }
+        }
+    }
+
     public void GenerateMap()
     {
+        CleanMap();
         Bounds tileBounds = startTilePrefab.GetComponentInChildren<Renderer>().bounds;
         Vector3 offset = new Vector3(tileBounds.size.x * (size.x - 1), 0f, tileBounds.size.z * (size.y - 1)) * -0.5f;
 
