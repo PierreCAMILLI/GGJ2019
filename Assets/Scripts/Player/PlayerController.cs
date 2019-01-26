@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = Control.Instance.Player(playerNumber).Direction;
         if (handleCameraOrientation)
         {
-            player.SetDirection((Camera.main.transform.forward.X0Z() * dir.y) + (Camera.main.transform.right.X0Z() * dir.x));
+            player.SetDirection((Camera.main.transform.forward.X0Z().normalized * dir.y) + (Camera.main.transform.right.X0Z().normalized * dir.x));
         } else 
         {
             player.SetDirection(dir.XZ());
