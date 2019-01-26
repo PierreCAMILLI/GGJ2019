@@ -8,25 +8,32 @@ public class TimerDisplay : MonoBehaviour
 
     // Use this for initialization
 
-    private float timer = 12;
-    public Text TimerText;
+    private float timer = 10;
+    public Text timerText;
+    
+    public Color colorEndGame;
+
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        TimerText.text = Mathf.RoundToInt(timer).ToString();
+        
+        timerText.text = Mathf.RoundToInt(timer).ToString();
         if (timer <= 10)
         {
-            TimerText.color = Color.red;
+            timerText.color = colorEndGame;
         }
-
-        if (timer >= 0)
-        {
-            timer -= Time.deltaTime;
-        }
+        
+       
     }
+
+    /*void SpawnEndScreen()
+    {
+        End_Screen.SetActive(true);
+        EndScore.GetComponent<Text>().enabled = true;
+    }*/
 }
