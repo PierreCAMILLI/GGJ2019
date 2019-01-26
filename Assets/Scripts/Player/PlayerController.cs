@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private int playerNumber = 0;
 
+    [SerializeField]
+    private bool handleCameraOrientation = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleDirection();
+    }
+
+    void HandleDirection()
+    {
         Vector2 dir = Control.Instance.Player(playerNumber).Direction;
-        player.SetDirection(new Vector3(dir.x, 0f, dir.y));
+        if (handleCameraOrientation)
+        {
+            player.SetDirection((Camera.main.transform.forward.X0Z() * dir.y) + (Camera.main.transform.right.X0Z() * dir.x));
+        } else 
+        {
+            player.SetDirection(dir.XZ());
+        }
     }
 }
