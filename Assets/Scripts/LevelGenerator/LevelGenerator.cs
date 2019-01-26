@@ -49,7 +49,12 @@ public class LevelGenerator : SingletonBehaviour<LevelGenerator>
                 if ((j * size.x) + i == startPosition)
                 {
                     StartingTile startingTile = Instantiate(startTilePrefab, position, Quaternion.identity, transform);
-                    Instantiate(playerPrefab, startingTile.StartingPoints[0].position, Quaternion.identity);
+                    for (int k = 0; k < GameManager.Instance.PlayersNumber; ++k)
+                    {
+                        Player playerInstance = Instantiate(playerPrefab, startingTile.StartingPoints[k].position, Quaternion.identity);
+                        PlayerController controller = playerInstance.GetComponent<PlayerController>();
+                        controller.PlayerNumber = k;
+                    }
                     tilesMap.Add(startingTile.gameObject);
                 } else
                 {

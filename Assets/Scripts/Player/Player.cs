@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region SerializeField
+    public int PlayerNumber { get; set; }
     [SerializeField]
     private PlayerView playerView;
     [SerializeField]

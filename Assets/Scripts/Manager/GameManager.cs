@@ -41,6 +41,10 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField]
     [Range(1,4)]
     private int playersNumber = 1;
+    public int PlayersNumber
+    {
+        get { return playersNumber; }
+    }
     #endregion
 
     #region Game Infos
@@ -123,6 +127,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void SetGameParameters(Initializer initializer)
     {
+        gameDuration = initializer.gameDuration;
         playersNumber = initializer.playersNumber;
         playersScore = new int[playersNumber];
     }
@@ -146,8 +151,8 @@ public class GameManager : SingletonBehaviour<GameManager>
                 // TEMP
                 SetGameParameters(new Initializer
                 {
-                    gameDuration = 120f,
-                    playersNumber = 1
+                    gameDuration = 60f,
+                    playersNumber = 2
                 });
                 LevelGenerator.Instance.GenerateMap();
                 break;
