@@ -216,8 +216,8 @@ MonoBehaviour:
   - {fileID: 1357169634}
   - {fileID: 936924312}
   - {fileID: 925577240}
-  minimum: 5
-  maximum: 10
+  minimum: 1
+  maximum: 2
 --- !u!4 &684323401
 Transform:
   m_ObjectHideFlags: 0

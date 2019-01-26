@@ -36,7 +36,6 @@ public class SpawnManager : SingletonBehaviour<SpawnManager> {
         Invoke("Spawn", randomTime);
         RandomSpawn = Random.Range(0, positions.Length);
         RandomEnemy = Random.Range(0, Enemies.Length);
-        Debug.Log(RandomEnemy);
         Instantiate(Enemies[RandomEnemy], positions[RandomSpawn].position, positions[RandomSpawn].rotation); 
     }
 }
