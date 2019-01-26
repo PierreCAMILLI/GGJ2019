@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -21,8 +22,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerStateMachine stateMachine;
 
+    [Header("Interaction")]
     [SerializeField]
-    private float speed;
+    private float interactionRadius = 2f;
+    [SerializeField]
+    private LayerMask interactableMask;
+    private Interactable closerInteractable;
+
+    [Space]
+    [SerializeField]
+    private float speed = 10f;
     public float Speed
     {
         get { return speed; }
@@ -51,10 +60,41 @@ public class Player : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+        HandleSelectable();
     }
 
     void FixedUpdate()
     {
         stateMachine.FixedUpdate();
+    }
+
+    private void HandleSelectable()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+        IEnumerable<Interactable> interactables = colliders.Select(c => c.GetComponent<Interactable>()).Where(i => i != null);
+        if (interactables.Count() != 0)
+        {
+            closerInteractable = interactables.Aggregate((minN, n) => Vector3.SqrMagnitude(transform.position - n.transform.position) < Vector3.SqrMagnitude(transform.position - minN.transform.position) ? n : minN);
+        } else
+        {
+            closerInteractable = null;
+        }
+    }
+
+    public void Interact()
+    {
+        if (closerInteractable != null)
+        {
+            closerInteractable.OnInteraction(new Interactable.Interaction
+            {
+                player = this
+            });
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, interactionRadius);
     }
 }

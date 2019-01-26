@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         HandleDirection();
+        HandleInteraction();
     }
 
     void HandleDirection()
@@ -34,6 +35,14 @@ public class PlayerController : MonoBehaviour
         } else 
         {
             player.SetDirection(dir.XZ());
+        }
+    }
+
+    void HandleInteraction()
+    {
+        if (Control.Instance.Player(playerNumber).InteractionDown)
+        {
+            player.Interact();
         }
     }
 }
