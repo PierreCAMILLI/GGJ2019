@@ -50,7 +50,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
     [Header("Parameters")]
     [SerializeField]
-    private float gameDuration = 120f;
+    private float gameDuration = 60f;
     [SerializeField]
     [Range(1,4)]
     private int playersNumber = 1;
@@ -190,11 +190,12 @@ public class GameManager : SingletonBehaviour<GameManager>
                 startCounter = 0f;
                 gameTimer = 0f;
                 // TEMP
-                SetGameParameters(new Initializer
+                /*SetGameParameters(new Initializer
                 {
                     gameDuration = 120f,
+                    gameDuration = 5f,
                     playersNumber = 1
-                });
+                });*/
                 LevelGenerator.Instance.GenerateMap();
                 break;
             case State.Game:
@@ -264,6 +265,32 @@ public class GameManager : SingletonBehaviour<GameManager>
         Menu.Instance.CreditsMenu.gameObject.SetActive(false);
         Menu.Instance.MainMenu.gameObject.SetActive(true);
     }
+
+    public void Set2players()
+    {
+        playersNumber = 2;
+    }
+
+    public void Set1player()
+    {
+        playersNumber = 1;
+    }
+
+    public void Set30secondes()
+    {
+        gameDuration = 30;
+    }
+
+    public void Set60secondes()
+    {
+        gameDuration = 60;
+    }
+
+    public void Set120secondes()
+    {
+        gameDuration = 120;
+    }
+
 
     public void Exit()
     {
