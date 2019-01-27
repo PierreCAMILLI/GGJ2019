@@ -9,24 +9,33 @@ public class OutlineMesh : MonoBehaviour
     private Color outlineColor = Color.cyan;
 
     [SerializeField]
-    [Range(0f,0.7f)]
+    [Range(0f,3f)]
     private float width = 0.7f;
 
-    Material outlineMaterial;
+    Material[] outlineMaterials;
 
     // Start is called before the first frame update
     void Awake()
     {
-        Renderer renderer = GetComponent<Renderer>();
-        outlineMaterial = renderer.materials.First(m => m.HasProperty("_OutlineColor") && m.HasProperty("_Outline"));
-
+        outlineMaterials = GetMaterials();
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    UpdateVisual(outlineMaterial);
-    //}
+    private Material[] GetMaterials()
+    {
+        List<Renderer> renderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
+        List<Material> materials = new List<Material>();
+        foreach (Renderer renderer in renderers)
+        {
+            // Material[] mats = Application.isPlaying ? renderer.materials : renderer.sharedMaterials;
+            Material[] mats = renderer.sharedMaterials;
+            Material outline = mats.FirstOrDefault(m => m.name.Contains("Outline"));
+            if (outline != null)
+            {
+                materials.Add(outline);
+            }
+        }
+        return materials.ToArray();
+    }
 
     private void UpdateVisual(Material material)
     {
@@ -39,16 +48,22 @@ public class OutlineMesh : MonoBehaviour
 
     private void OnWillRenderObject()
     {
-        UpdateVisual(outlineMaterial);
+        foreach(Material outlineMaterial in outlineMaterials)
+        {
+            UpdateVisual(outlineMaterial);
+        }
     }
 
     private void OnDisable()
     {
-        if (outlineMaterial != null)
+        if (outlineMaterials == null)
+        {
+            outlineMaterials = GetMaterials();
+        }
+        foreach (Material outlineMaterial in outlineMaterials)
         {
             outlineMaterial.SetColor("_OutlineColor", Color.clear);
             outlineMaterial.SetFloat("_Outline", 0f);
-            Debug.Log("Disable");
         }
     }
 
@@ -56,12 +71,14 @@ public class OutlineMesh : MonoBehaviour
     {
         if (isActiveAndEnabled)
         {
-            Renderer renderer = GetComponent<Renderer>();
-            foreach (Material material in renderer.sharedMaterials)
+            Material[] materials = GetMaterials();
+            foreach (Material material in materials)
             {
                 UpdateVisual(material);
             }
+        } else
+        {
+            OnDisable();
         }
-        
     }
 }

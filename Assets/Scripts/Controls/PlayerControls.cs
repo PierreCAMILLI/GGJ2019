@@ -14,6 +14,9 @@ public class PlayerControls : ScriptableObject
     private KeyCode interaction = KeyCode.Joystick1Button0;
 
     [SerializeField]
+    private KeyCode dropItem = KeyCode.Joystick1Button1;
+
+    [SerializeField]
     private KeyCode pause = KeyCode.Joystick1Button7;
 
     public float Horizontal
@@ -40,6 +43,11 @@ public class PlayerControls : ScriptableObject
     public bool InteractionUp
     {
         get { return Input.GetKeyUp(interaction); }
+    }
+
+    public bool DropItem
+    {
+        get { return Input.GetKeyDown(dropItem); }
     }
 
     public bool PauseDown

@@ -10,7 +10,8 @@ public class GameManager : SingletonBehaviour<GameManager>
         StartingCounter,
         Game,
         StopMessage,
-        Score
+        Score,
+        DebugMode
     }
 
     #region Serialized Fields
@@ -117,6 +118,8 @@ public class GameManager : SingletonBehaviour<GameManager>
                 break;
             case State.Score:
                 break;
+            case State.DebugMode:
+                break;
         }
     }
 
@@ -169,6 +172,9 @@ public class GameManager : SingletonBehaviour<GameManager>
             case State.Score:
                 HUD.Instance.StopCleaning.gameObject.SetActive(false);
                 HUD.Instance.Score.gameObject.SetActive(true);
+                break;
+            case State.DebugMode:
+                playersScore = new int[playersNumber];
                 break;
         }
     }

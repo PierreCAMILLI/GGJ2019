@@ -8,7 +8,9 @@ public class Player : MonoBehaviour
     public enum State
     {
         Idle,
-        Walk
+        Walk,
+        IdleItem,
+        WalkItem
     }
 
     #region Getter
@@ -45,6 +47,8 @@ public class Player : MonoBehaviour
         this.Direction = (direction.sqrMagnitude > 1f ? direction.normalized : direction);
     }
 
+    public ItemsEnum Item { get; set; }
+
     private void Awake()
     {
         Collider = GetComponent<Collider>();
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.GameState != GameManager.State.Game)
+        if (GameManager.Instance.GameState != GameManager.State.Game && GameManager.Instance.GameState != GameManager.State.DebugMode)
         {
             return;
         }

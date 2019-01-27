@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1723605342164506050}
   - component: {fileID: 1723605342164506049}
   - component: {fileID: 1723605342164506051}
+  - component: {fileID: 909764214015120580}
   m_Layer: 12
   m_Name: View
   m_TagString: Untagged
@@ -90,7 +91,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae6d1004894a5841a91a28002ac8ce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1723605343310872895}
+--- !u!95 &909764214015120580
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723605342164506055}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1723605343310872898
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 1723605343310872898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1723605342164506048}
   m_Father: {fileID: 0}
@@ -144,11 +164,13 @@ MonoBehaviour:
     states:
     - {fileID: 11400000, guid: 6ae2d0407e7c9804baf2eeab59bb23ab, type: 2}
     - {fileID: 11400000, guid: 1d4a21fc3e1f9574196b52983db56738, type: 2}
-  interactionRadius: 2
+    - {fileID: 11400000, guid: 10907204a26da9c41a59b6d7a4c53ef7, type: 2}
+    - {fileID: 11400000, guid: 3c5ba6634afb8ce43a3e0765dd5ce11d, type: 2}
+  interactionRadius: 3
   interactableMask:
     serializedVersion: 2
     m_Bits: 65536
-  speed: 25
+  speed: 30
 --- !u!114 &1723605343310872894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1723605343310872895}
-  playerNumber: 0
   handleCameraOrientation: 1
 --- !u!136 &1723605343310872893
 CapsuleCollider:
@@ -193,4 +214,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2

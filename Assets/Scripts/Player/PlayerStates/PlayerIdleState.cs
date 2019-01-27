@@ -26,5 +26,9 @@ public class PlayerIdleState : PlayerState
         {
             StateMachine.SetState(Player.State.Walk);
         }
+        if (Player.Item != ItemsEnum.Nothing)
+        {
+            StateMachine.SetState(Player.State.IdleItem);
+        }
     }
 }
