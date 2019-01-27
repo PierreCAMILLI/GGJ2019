@@ -539,16 +539,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4645942088186293555, guid: 69639fd93e642f94a83a8f7cfad0a541,
-        type: 3}
-      propertyPath: MainMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: e5dce3a09b965dc43aa70451f6c99338, type: 3}
-    - target: {fileID: 4645942088186293555, guid: 69639fd93e642f94a83a8f7cfad0a541,
-        type: 3}
-      propertyPath: gameDuration
-      value: 120
-      objectReference: {fileID: 0}
     - target: {fileID: 4645942088186293554, guid: 69639fd93e642f94a83a8f7cfad0a541,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -603,16 +593,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4746314636205935085, guid: 69639fd93e642f94a83a8f7cfad0a541,
-        type: 3}
-      propertyPath: Loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4746314636205935085, guid: 69639fd93e642f94a83a8f7cfad0a541,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69639fd93e642f94a83a8f7cfad0a541, type: 3}

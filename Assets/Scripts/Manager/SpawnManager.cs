@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SpawnManager : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class SpawnManager : MonoBehaviour {
     
 
     [SerializeField]
-    private Transform[] positions;
+    private SpawnPoint[] positions;
 
     public Bounds1D boundsTime;
     private float apparition; 
@@ -33,11 +34,19 @@ public class SpawnManager : MonoBehaviour {
 	void Update () {
         if (GameManager.Instance.GameState == GameManager.State.Game && Time.time > (timeLastSpawn + timeNextSpawn))
         {
-            UpdateTimes();
 
-            int randomSpawn = Random.Range(0, positions.Length);
-            int randomEnemy = Random.Range(0, Enemies.Length);
-            Instantiate(Enemies[randomEnemy], positions[randomSpawn].position, positions[randomSpawn].rotation);
+            SpawnPoint[] availablePositions = positions.Where(p => p.available).ToArray();
+            if (availablePositions.Length > 0)
+            {
+                UpdateTimes();
+
+                int randomSpawn = Random.Range(0, availablePositions.Length);
+                int randomEnemy = Random.Range(0, Enemies.Length);
+                SpawnPoint position = positions[randomSpawn];
+                Instantiate(Enemies[randomEnemy], position.transform.position, position.transform.rotation);
+                position.setAvailable(false);
+
+            }
         }
 	}
 
