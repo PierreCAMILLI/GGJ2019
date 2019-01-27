@@ -35,7 +35,7 @@ public class Dust : MonoBehaviour, Disposable
     {
         GameManager.Instance.PlayersScore[player.PlayerNumber] += pointsEarnedOnClean;
         GameManager.Instance.SpawnPointsNotification(transform.position, pointsEarnedOnClean);
-        player.Item = ItemsEnum.Nothing;
+        // player.Item = ItemsEnum.Nothing;
         Destroy(gameObject);
     }
 }

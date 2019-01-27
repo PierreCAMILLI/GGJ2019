@@ -8,7 +8,7 @@ public class Broom : MonoBehaviour
     {
         if (interaction.player.Item == ItemsEnum.Nothing)
         {
-            interaction.player.Item = ItemsEnum.Broom;
+            // interaction.player.Item = ItemsEnum.Broom;
             Destroy(gameObject);
         }
     }

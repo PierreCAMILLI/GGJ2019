@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour {
     [SerializeField]
     private SpawnPoint[] positions;
 
-    public Bounds1D boundsTime;
+    public Bounds1D boundsTime = new Bounds1D(3f, 15f, false);
     private float apparition; 
     private float temps;
 
@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour {
                 int randomSpawn = Random.Range(0, availablePositions.Length);
                 int randomEnemy = Random.Range(0, Enemies.Length);
                 SpawnPoint position = positions[randomSpawn];
-                Instantiate(Enemies[randomEnemy], position.transform.position, position.transform.rotation);
+                Instantiate(Enemies[randomEnemy], position.transform.position, Quaternion.identity);
                 position.setAvailable(false);
 
             }

@@ -67,7 +67,7 @@ public struct Bounds1D {
     /// <param name="min">Minimal value of the bounds</param>
     /// <param name="max">Maximal value of the bounds</param>
     /// <param name="restrict">Indicates whether or not the values push the other</param>
-    Bounds1D(float min = 0.0f, float max = 0.0f, bool restrict = true)
+    public Bounds1D(float min = 0.0f, float max = 0.0f, bool restrict = true)
     {
         if (min <= max)
         {
