@@ -192,7 +192,7 @@ public class GameManager : SingletonBehaviour<GameManager>
                 // TEMP
                 SetGameParameters(new Initializer
                 {
-                    gameDuration = 1f,
+                    gameDuration = 120f,
                     playersNumber = 1
                 });
                 LevelGenerator.Instance.GenerateMap();

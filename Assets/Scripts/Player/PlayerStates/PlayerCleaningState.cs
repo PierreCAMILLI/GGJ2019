@@ -14,10 +14,12 @@ public class PlayerCleaningState : PlayerState
     public override void OnStateEnter()
     {
         timeStartCleaning = Time.time;
+        Player.interactionEnabled = false;
     }
 
     public override void OnStateExit()
     {
+        Player.interactionEnabled = true;
     }
 
     public override void Update()

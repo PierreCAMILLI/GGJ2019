@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     }
 
     [Header("Interaction")]
+    public bool interactionEnabled = true;
     [SerializeField]
     private float interactionRadius = 2f;
     [SerializeField]
@@ -111,7 +112,7 @@ public class Player : MonoBehaviour
 
     public void Interact()
     {
-        if (closerInteractable != null)
+        if (interactionEnabled && closerInteractable != null)
         {
             closerInteractable.OnInteraction(new Interactable.Interaction
             {
