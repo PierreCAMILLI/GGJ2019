@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : SingletonBehaviour<SpawnManager> {
+public class SpawnManager : MonoBehaviour {
 
     
 
@@ -13,29 +13,32 @@ public class SpawnManager : SingletonBehaviour<SpawnManager> {
     [SerializeField]
     private Transform[] positions;
 
-    public float minimum;
-    public float maximum;
+    public Bounds1D boundsTime;
     private float apparition; 
     private float temps;
-    private int RandomSpawn;
-    private int RandomEnemy;
 
+    private float timeLastSpawn;
+    private float timeNextSpawn;
 
 	void Start () {
-        Spawn();
+        UpdateTimes();
 	}
 	
-	
+	void UpdateTimes()
+    {
+        timeLastSpawn = Time.time;
+        timeNextSpawn = Random.Range(boundsTime.Min, boundsTime.Max);
+    }
+
 	void Update () {
-        
+        if (GameManager.Instance.GameState == GameManager.State.Game && Time.time > (timeLastSpawn + timeNextSpawn))
+        {
+            UpdateTimes();
+
+            int randomSpawn = Random.Range(0, positions.Length);
+            int randomEnemy = Random.Range(0, Enemies.Length);
+            Instantiate(Enemies[randomEnemy], positions[randomSpawn].position, positions[randomSpawn].rotation);
+        }
 	}
 
-    void Spawn()
-    {
-        float randomTime = Random.Range(minimum, maximum);
-        Invoke("Spawn", randomTime);
-        RandomSpawn = Random.Range(0, positions.Length);
-        RandomEnemy = Random.Range(0, Enemies.Length);
-        Instantiate(Enemies[RandomEnemy], positions[RandomSpawn].position, positions[RandomSpawn].rotation); 
-    }
 }
