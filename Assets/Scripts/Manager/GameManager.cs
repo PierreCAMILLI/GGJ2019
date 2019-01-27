@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
+
     public enum State
     {
         MainMenu,
@@ -27,15 +28,25 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         get { return stopDuration; }
     }
+
+    #endregion
+    #region Sounds
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip MainMusic;
+    [SerializeField]
+    private AudioClip FinalSound;
     #endregion
 
+
     #region Game Parameters
+    
     public struct Initializer
     {
         public float gameDuration;
         public int playersNumber;
     }
-
+    [Header("Parameters")]
     [SerializeField]
     private float gameDuration = 120f;
     [SerializeField]
@@ -48,6 +59,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     #endregion
 
     #region Game Infos
+    [Header("Infos")]
     [SerializeField]
     private State gameState;
     public State GameState
@@ -78,10 +90,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         get { return playersScore; }
     }
+
+    private AudioSource AudioPlayer;
     #endregion
 
     private void Start()
     {
+        AudioPlayer = GetComponent<AudioSource>();
         SetGameState(gameState);
     }
 
@@ -145,26 +160,34 @@ public class GameManager : SingletonBehaviour<GameManager>
                 HUD.Instance.StartingCounter.gameObject.SetActive(true);
                 HUD.Instance.StopCleaning.gameObject.SetActive(false);
                 HUD.Instance.Score.gameObject.SetActive(false);
-
+                
                 startCounter = 0f;
                 gameTimer = 0f;
                 // TEMP
                 SetGameParameters(new Initializer
                 {
-                    gameDuration = 60f,
-                    playersNumber = 2
+                    gameDuration = 10f,
+                    playersNumber = 1
                 });
                 LevelGenerator.Instance.GenerateMap();
                 break;
             case State.Game:
                 HUD.Instance.StartingCounter.gameObject.SetActive(false);
 
+                AudioPlayer.loop = true;
+                AudioPlayer.clip = MainMusic;
+                AudioPlayer.Play();
+                
                 timerActive = true;
                 break;
             case State.StopMessage:
                 HUD.Instance.StopCleaning.gameObject.SetActive(true);
 
                 stopCounter = 0f;
+
+                AudioPlayer.loop = false;
+                AudioPlayer.clip = FinalSound;
+                AudioPlayer.Play();
                 break;
             case State.Score:
                 HUD.Instance.StopCleaning.gameObject.SetActive(false);
