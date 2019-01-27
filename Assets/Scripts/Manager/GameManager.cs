@@ -276,21 +276,10 @@ public class GameManager : SingletonBehaviour<GameManager>
         playersNumber = 1;
     }
 
-    public void Set30secondes()
+    public void SetGameDuration(int duration)
     {
-        gameDuration = 30;
+        gameDuration = duration;
     }
-
-    public void Set60secondes()
-    {
-        gameDuration = 60;
-    }
-
-    public void Set120secondes()
-    {
-        gameDuration = 120;
-    }
-
 
     public void Exit()
     {
