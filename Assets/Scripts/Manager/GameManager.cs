@@ -267,14 +267,9 @@ public class GameManager : SingletonBehaviour<GameManager>
         Menu.Instance.MainMenu.gameObject.SetActive(true);
     }
 
-    public void Set2players()
+    public void SetPlayerNumber(int number)
     {
-        playersNumber = 2;
-    }
-
-    public void Set1player()
-    {
-        playersNumber = 1;
+        playersNumber = number;
     }
 
     public void SetGameDuration(int duration)

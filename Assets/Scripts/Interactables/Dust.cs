@@ -12,6 +12,8 @@ public class Dust : MonoBehaviour, Disposable
     [SerializeField]
     private int pointsEarnedOnClean;
 
+    public SpawnPoint spawnPoint;
+
     private bool isDisposing = false;
 
     public void OnInteract(Interactable.Interaction interaction)
@@ -35,6 +37,7 @@ public class Dust : MonoBehaviour, Disposable
     {
         GameManager.Instance.PlayersScore[player.PlayerNumber] += pointsEarnedOnClean;
         GameManager.Instance.SpawnPointsNotification(transform.position, pointsEarnedOnClean);
+        spawnPoint.setAvailable(true);
         // player.Item = ItemsEnum.Nothing;
         Destroy(gameObject);
     }

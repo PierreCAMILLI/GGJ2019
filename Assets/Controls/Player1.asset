@@ -15,4 +15,5 @@ MonoBehaviour:
   horizontalAxis: Horizontal
   verticalAxis: Vertical
   interaction: 350
+  dropItem: 351
   pause: 357

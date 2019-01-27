@@ -76,6 +76,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.GameState == GameManager.State.Score)
+        {
+            Destroy(gameObject);
+        }
         if (GameManager.Instance.GameState != GameManager.State.Game && GameManager.Instance.GameState != GameManager.State.DebugMode)
         {
             return;

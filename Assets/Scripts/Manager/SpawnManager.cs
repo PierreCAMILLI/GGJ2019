@@ -21,17 +21,37 @@ public class SpawnManager : MonoBehaviour {
     private float timeLastSpawn;
     private float timeNextSpawn;
 
+    private List<GameObject> spawned;
+
 	void Start () {
+        CleanDust();
         UpdateTimes();
 	}
-	
-	void UpdateTimes()
+
+    void UpdateTimes()
     {
         timeLastSpawn = Time.time;
         timeNextSpawn = Random.Range(boundsTime.Min, boundsTime.Max);
     }
 
-	void Update () {
+    void CleanDust()
+    {
+        if (spawned != null)
+        {
+            foreach(GameObject dust in spawned)
+            {
+                Destroy(dust);
+            }
+        }
+        spawned = new List<GameObject>();
+    }
+
+    private void OnDestroy()
+    {
+        CleanDust();
+    }
+
+    void Update () {
         if (GameManager.Instance.GameState == GameManager.State.Game && Time.time > (timeLastSpawn + timeNextSpawn))
         {
 
@@ -47,7 +67,12 @@ public class SpawnManager : MonoBehaviour {
                 {
                     Debug.LogError("Spawning on unavailable spot");
                 }
-                Instantiate(Enemies[randomEnemy], position.transform.position, Quaternion.identity);
+                GameObject enemy = Instantiate(Enemies[randomEnemy], position.transform.position, Quaternion.identity);
+
+                spawned.Add(enemy);
+                Dust dust = enemy.GetComponent<Dust>();
+                dust.spawnPoint = position;
+
                 position.setAvailable(false);
 
             }
