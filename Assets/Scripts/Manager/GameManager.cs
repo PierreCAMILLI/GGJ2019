@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
@@ -164,8 +165,24 @@ public class GameManager : SingletonBehaviour<GameManager>
         switch (state)
         {
             case State.MainMenu:
+                Menu.Instance.MainMenu.gameObject.SetActive(true);
+                Menu.Instance.OptionMenu.gameObject.SetActive(false);
+                Menu.Instance.CreditsMenu.gameObject.SetActive(false);
+
+                HUD.Instance.Icon.gameObject.SetActive(false);
+                HUD.Instance.Clock.gameObject.SetActive(false);
+                HUD.Instance.Timer.gameObject.SetActive(false);
+                HUD.Instance.StartingCounter.gameObject.SetActive(false);
+                HUD.Instance.StopCleaning.gameObject.SetActive(false);
+                HUD.Instance.Score.gameObject.SetActive(false);
                 break;
             case State.StartingCounter:
+                Menu.Instance.MainMenu.gameObject.SetActive(false);
+                Menu.Instance.OptionMenu.gameObject.SetActive(false);
+
+                HUD.Instance.Icon.gameObject.SetActive(true);
+                HUD.Instance.Clock.gameObject.SetActive(true);
+                HUD.Instance.Timer.gameObject.SetActive(true);
                 HUD.Instance.StartingCounter.gameObject.SetActive(true);
                 HUD.Instance.StopCleaning.gameObject.SetActive(false);
                 HUD.Instance.Score.gameObject.SetActive(false);
@@ -175,7 +192,7 @@ public class GameManager : SingletonBehaviour<GameManager>
                 // TEMP
                 SetGameParameters(new Initializer
                 {
-                    gameDuration = 12f,
+                    gameDuration = 1f,
                     playersNumber = 1
                 });
                 LevelGenerator.Instance.GenerateMap();
@@ -213,9 +230,45 @@ public class GameManager : SingletonBehaviour<GameManager>
         SetGameState(State.StartingCounter);
     }
 
+    public void LaunchGame()
+    {
+        SetGameState(State.StartingCounter);
+    }
+
     public void BackToMenu()
     {
         SetGameState(State.MainMenu);
+    }
+
+    public void DisplayOptions()
+    {
+        Menu.Instance.OptionMenu.gameObject.SetActive(true);
+        Menu.Instance.MainMenu.gameObject.SetActive(false);
+        Debug.Log("Options");
+    }
+
+    public void DisplayCredits()
+    {
+        Menu.Instance.CreditsMenu.gameObject.SetActive(true);
+        Menu.Instance.MainMenu.gameObject.SetActive(false);
+    }
+
+    public void BackToMainMenuOptions()
+    {
+        Menu.Instance.OptionMenu.gameObject.SetActive(false);
+        Menu.Instance.MainMenu.gameObject.SetActive(true);
+    }
+
+    public void BackToMainMenuCredits()
+    {
+        Menu.Instance.CreditsMenu.gameObject.SetActive(false);
+        Menu.Instance.MainMenu.gameObject.SetActive(true);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+        Debug.Log("Coucou");
     }
 
     public void SpawnPointsNotification(Vector3 position, int points)
