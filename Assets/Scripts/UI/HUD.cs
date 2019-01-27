@@ -25,4 +25,24 @@ public class HUD : SingletonBehaviour<HUD>
         get { return score; }
     }
 
+    [SerializeField]
+    private RectTransform timer;
+    public RectTransform Timer
+    {
+        get { return timer; }
+    }
+
+    [SerializeField]
+    private RectTransform clock;
+    public RectTransform Clock
+    {
+        get { return clock; }
+    }
+
+    [SerializeField]
+    private RectTransform icon;
+    public RectTransform Icon
+    {
+        get { return icon; }
+    }
 }
