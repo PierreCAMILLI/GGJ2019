@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
         Idle,
         Walk,
         IdleItem,
-        WalkItem
+        WalkItem,
+        Cleaning
     }
 
     #region Getter
@@ -24,6 +25,10 @@ public class Player : MonoBehaviour
     private PlayerView playerView;
     [SerializeField]
     private PlayerStateMachine stateMachine;
+    public PlayerStateMachine StateMachine
+    {
+        get { return stateMachine; }
+    }
 
     [Header("Interaction")]
     [SerializeField]
@@ -39,6 +44,12 @@ public class Player : MonoBehaviour
     {
         get { return speed; }
     }
+    #endregion
+
+    #region Received variable
+    public float CleaningTime { get; set; }
+    // VERY DIRTY CODE!!!
+    public Disposable HandlingDisposable { get; set; }
     #endregion
 
     public Vector3 Direction { get; private set; }

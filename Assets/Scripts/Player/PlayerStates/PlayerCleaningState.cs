@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCleaningState : MonoBehaviour
+[CreateAssetMenu(fileName = "CleaningState", menuName = "Player States/Cleaning", order = 5)]
+public class PlayerCleaningState : PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+    private float timeStartCleaning;
+
+    public override void FixedUpdate()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnStateEnter()
     {
-        
+        timeStartCleaning = Time.time;
+    }
+
+    public override void OnStateExit()
+    {
+    }
+
+    public override void Update()
+    {
+        if (Time.time > (timeStartCleaning + Player.CleaningTime))
+        {
+            Player.HandlingDisposable.Dispose(Player);
+            StateMachine.SetState((Player.Item != ItemsEnum.Nothing) ? Player.State.IdleItem : Player.State.Idle);
+        }
     }
 }

@@ -19,6 +19,14 @@ public class PointsNotification : MonoBehaviour
         text.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Destroy"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void UpdateText(float opacity)
     {
         char ope = ' ';
@@ -37,6 +45,11 @@ public class PointsNotification : MonoBehaviour
         text.text = ope + pointsEarned.ToString();
 
         text.rectTransform.position = Camera.main.WorldToScreenPoint(transform.position);
+    }
+
+    public void SetPoints(int points)
+    {
+        pointsEarned = points;
     }
 
     public void Play()

@@ -95,6 +95,12 @@ public class GameManager : SingletonBehaviour<GameManager>
     private AudioSource AudioPlayer;
     #endregion
 
+    #region Prefabs to Spawn
+    [Header("Prefabs to spawn")]
+    [SerializeField]
+    private PointsNotification pointsNotificationPrefab;
+    #endregion
+
     private void Start()
     {
         AudioPlayer = GetComponent<AudioSource>();
@@ -210,5 +216,12 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void BackToMenu()
     {
         SetGameState(State.MainMenu);
+    }
+
+    public void SpawnPointsNotification(Vector3 position, int points)
+    {
+        PointsNotification pointsNotification = Instantiate(pointsNotificationPrefab, position, Quaternion.identity) as PointsNotification;
+        pointsNotification.SetPoints(points);
+        pointsNotification.Play();
     }
 }
