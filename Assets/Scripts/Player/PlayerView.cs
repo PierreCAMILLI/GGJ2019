@@ -8,13 +8,10 @@ public class PlayerView : MonoBehaviour
     private Player player;
 
     [SerializeField]
-    private ParticleSystem cleaningParticles;
+    private GameObject broom;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private ParticleSystem cleaningParticles;
 
     // Update is called once per frame
     void Update()
@@ -26,5 +23,6 @@ public class PlayerView : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(player.Direction, Vector3.up);
         }
         cleaningParticles.gameObject.SetActive(player.StateMachine.State == Player.State.Cleaning) ;
+        broom.SetActive(player.Item != ItemsEnum.Nothing);
     }
 }

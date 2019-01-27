@@ -12,12 +12,10 @@ public class PlayerIdleState : PlayerState
 
     public override void OnStateEnter()
     {
-        Debug.Log("IDLE ENTER");
     }
 
     public override void OnStateExit()
     {
-        Debug.Log("IDLE EXIT");
     }
 
     public override void Update()

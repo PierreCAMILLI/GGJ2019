@@ -42,7 +42,11 @@ public class SpawnManager : MonoBehaviour {
 
                 int randomSpawn = Random.Range(0, availablePositions.Length);
                 int randomEnemy = Random.Range(0, Enemies.Length);
-                SpawnPoint position = positions[randomSpawn];
+                SpawnPoint position = availablePositions[randomSpawn];
+                if (!position.available)
+                {
+                    Debug.LogError("Spawning on unavailable spot");
+                }
                 Instantiate(Enemies[randomEnemy], position.transform.position, Quaternion.identity);
                 position.setAvailable(false);
 

@@ -44,7 +44,11 @@ public class PointsNotification : MonoBehaviour
         text.color = c;
         text.text = ope + pointsEarned.ToString();
 
-        text.rectTransform.position = Camera.main.WorldToScreenPoint(transform.position);
+        Camera.main.ResetWorldToCameraMatrix();
+        Vector3 newPosition = Camera.main.WorldToScreenPoint(transform.position);
+        newPosition.y = Screen.height * newPosition.y;
+        text.rectTransform.position = newPosition;
+
     }
 
     public void SetPoints(int points)

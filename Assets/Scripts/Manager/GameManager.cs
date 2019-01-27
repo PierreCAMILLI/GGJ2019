@@ -196,6 +196,7 @@ public class GameManager : SingletonBehaviour<GameManager>
                     gameDuration = 5f,
                     playersNumber = 1
                 });*/
+                playersScore = new int[playersNumber];
                 LevelGenerator.Instance.GenerateMap();
                 break;
             case State.Game:

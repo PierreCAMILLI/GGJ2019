@@ -12,12 +12,10 @@ public class PlayerWalkState : PlayerState
 
     public override void OnStateEnter()
     {
-        Debug.Log("WALK ENTER");
     }
 
     public override void OnStateExit()
     {
-        Debug.Log("WALK EXIT");
     }
 
     public override void Update()
